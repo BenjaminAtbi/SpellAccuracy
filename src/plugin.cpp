@@ -23,18 +23,7 @@ SKSEPluginLoad(const SKSE::LoadInterface *skse) {
     SetupLog();
     InitializeMessaging();
 
-    spdlog::info("Initialized info");
-    spdlog::error("Initialized error {}", 69);
-    spdlog::trace("Initialized trace");
-
-
-    SKSE::log::info("Initialized info");
-    SKSE::log::error("Initialized error {}", 69);
-    SKSE::log::trace("Initialized trace");
-
     logger::info("Initialized info");
-    logger::error("Initialized error {}", 69);
-    logger::trace("Initialized trace");
 
     return true;
 }

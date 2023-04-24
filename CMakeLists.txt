@@ -26,7 +26,6 @@ set(headers
 set(sources
     src/plugin.cpp
     src/pch.cpp
-    src/logging.cpp
     src/hooks.cpp
 )
 
