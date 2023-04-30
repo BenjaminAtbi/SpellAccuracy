@@ -3,8 +3,4 @@
 #include "RE/Skyrim.h"
 #include "SKSE/SKSE.h"
 
-class ProjectileHook 
-{
-    public:
-        static void InitializeHook(SKSE::Trampoline& trampoline);
-};
+void InitializeHooks(SKSE::Trampoline& trampoline);

@@ -6,27 +6,30 @@
 
 using namespace SKSE;
 
-void InitializeMessaging() {
-    if (!GetMessagingInterface()->RegisterListener([](MessagingInterface::Message *message) {
-            if (message->type == MessagingInterface::kDataLoaded) InitializeHooking();
-        })) {
-        stl::report_and_fail("Unable to register message listener.");
-    }
-}
+
 
 /*
 create trampoline space and write call to new function
 */
-void InitializeHooking() {
+void InitializeTrampoline() {
     logger::trace("Initializing trampoline...");
     auto &trampoline = SKSE::GetTrampoline();
     trampoline.create(64);
     logger::trace("Trampoline initialized.");
 
-    ProjectileHook::InitializeHook(trampoline);
-
-    // oldfunc = trampoline.write_call<5>(GetHookAddress(), newfunc);
+    InitializeHooks(trampoline);
 }
+
+void InitializeMessaging() {
+    if (!GetMessagingInterface()->RegisterListener([](MessagingInterface::Message *message) {
+            //load hooks after data is loaded
+            if (message->type == MessagingInterface::kDataLoaded) InitializeTrampoline();
+        })) {
+        stl::report_and_fail("Unable to register message listener.");
+    }
+}
+
+
 
 SKSEPluginLoad(const SKSE::LoadInterface *skse) {
     
