@@ -2,7 +2,7 @@
 
 
 
-namespace ProjectileHook {
+namespace SampleHook {
     // signature of the function being called (and the one that will replace it)
     int32_t* PopulateHitData(RE::Actor* target, char* unk0);
 
@@ -15,7 +15,7 @@ namespace ProjectileHook {
         return value;
     }
 
-    void InitializeHook(SKSE::Trampoline& trampoline) {
+    static void InitializeHook(SKSE::Trampoline& trampoline) {
         // The trampoline can be used to write a new call instruction at a given address (here the start of the function
         // for
         // HitData::Populate). We use write_code<5> to indicate this is a 5-byte call instruction (rather than the much
@@ -36,7 +36,17 @@ namespace ProjectileHook {
     }
 };
 
-void InitializeHooks(SKSE::Trampoline& trampoline) { ProjectileHook::InitializeHook(trampoline); }
+void ProjectileHook::InitProjectile(RE::Projectile* a_this) {
+    logger::debug("projectile Init");
+    _InitProjectile(a_this);
+}
+
+
+
+void InitializeHooks(SKSE::Trampoline& trampoline) { 
+    SampleHook::InitializeHook(trampoline); 
+    ProjectileHook::InitializeHook(trampoline);
+}
 
 
 

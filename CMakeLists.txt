@@ -21,6 +21,7 @@ set(headers
     include/PCH.h
     include/logging.h
     include/hooks.h
+    include/versionlibdb.h
 ) 
 
 set(sources

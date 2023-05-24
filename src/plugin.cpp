@@ -3,6 +3,7 @@
 #include "SKSE/SKSE.h"
 #include "logging.h"
 #include "hooks.h"
+#include "versionlibdb.h"
 
 using namespace SKSE;
 
@@ -29,6 +30,22 @@ void InitializeMessaging() {
     }
 }
 
+//bool DumpSpecificVersion() {
+//    // 1.6.640.0.8
+//    VersionDb db;
+//
+//    // Try to load database regardless of running executable version.
+//
+//    if (!db.Load(1, 6, 640, 0)) {
+//        logger::debug("Failed to load database!");
+//        return false;
+//    }
+//
+//    // Write out a file where each line is the ID and offset.
+//    db.Dump("offsets.txt");
+//    logger::debug("Dumped offsets ");
+//    return true;
+//}
 
 
 SKSEPluginLoad(const SKSE::LoadInterface *skse) {
@@ -37,6 +54,7 @@ SKSEPluginLoad(const SKSE::LoadInterface *skse) {
     
     SKSE::Init(skse);
     InitializeMessaging();
+    DumpSpecificVersion();
 
     logger::info("Initialized info");
 
