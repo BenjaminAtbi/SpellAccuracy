@@ -38,10 +38,20 @@ namespace SampleHook {
 
 void ProjectileHook::InitProjectile(RE::Projectile* a_this) {
     logger::debug("projectile Init");
+
+    auto& shooter = a_this->GetProjectileRuntimeData().shooter;
     _InitProjectile(a_this);
+    if (shooter.native_handle() == 0x100000) {
+        auto playerCharacter = RE::PlayerCharacter::GetSingleton();
+
+        //a_this.get
+
+        RE::NiPoint3 playerVelocity;
+        playerCharacter->GetLinearVelocity(playerVelocity);
+        logger::debug("player velocity x {}", playerVelocity.x);
+        
+    }
 }
-
-
 
 void InitializeHooks(SKSE::Trampoline& trampoline) { 
     SampleHook::InitializeHook(trampoline); 

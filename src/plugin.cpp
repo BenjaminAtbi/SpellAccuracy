@@ -54,7 +54,7 @@ SKSEPluginLoad(const SKSE::LoadInterface *skse) {
     
     SKSE::Init(skse);
     InitializeMessaging();
-    DumpSpecificVersion();
+    //DumpSpecificVersion();
 
     logger::info("Initialized info");
 
