@@ -1,7 +1,6 @@
 
 # Spell Accuracy
-
+SKSE mod to modify projectile physics
 
 # Credit 
 SkyrimScripting - Project template
-morcSkyrim - Github wiki with SKSE hook introduction
